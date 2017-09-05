@@ -1,0 +1,17 @@
+{
+  "name": "poemsbyparker",
+  "version": "1.0.0",
+  "description": "Poems written by Parker Lewis in 2017",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Parker Lewis",
+  "license": "MIT",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "knex": "^0.13.0",
+    "mocha": "^3.5.0",
+    "pg": "^7.3.0"
+  }
+}
