@@ -1,0 +1,18 @@
+include ../includes/head.pug
+body.container
+    h1 Create new poem Parker!
+
+    form(action="/poems" method="POST")
+        lable Title 
+            input(type="text", name="title")
+        //- TODO -- Make a component that gives more incrementing places for lines.
+        div#lines
+            input(type="text", name="1_line")
+        div
+            input(type="submit", value="Create Poem")
+
+
+
+//- poem 
+    has many - lines
+

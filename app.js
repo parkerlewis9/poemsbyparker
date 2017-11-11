@@ -1,31 +1,46 @@
 // require('dotenv').load();
 
-var express = require('express'),
+var express = require("express"),
     app = express(),
-    bodyParser = require('body-parser'),
-    // db = require("./models"),
+    bodyParser = require("body-parser"),
     methodOverride = require("method-override"),
-    morgan = require("morgan");
+    morgan = require("morgan"),
+    knex = require("./db/knex.js")
     // routeMiddleware = require("./middleware/routeHelper");
 
 
-app.set('view engine', 'pug');
-app.use(methodOverride('_method'));
-app.use(morgan('tiny'));
-app.use(express.static(__dirname + '/public'));
+app.set("view engine", "pug");
+app.use(methodOverride("_method"));
+app.use(morgan("tiny"));
+app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended:true}));
 
+app.get('/favicon.ico', function(req, res) {
+    res.status(204);
+});
 
 //******************* Home ****************************
 
-app.get("/", function(req, res) {
-  res.render("index")
+app.get("/", (req, res) => {
+    res.render("home")
+})
+
+app.get("/poems", (req, res) => {
+    knex("poems").select("*")
+        .then((poems) => {
+            console.log(poems)
+            res.render("poems/index", {poems})
+        })
 })
 
 
-app.get("/poems/new", (req, res) => {
-  res.render("new")
-})
+// app.get("/poems/new", (req, res) => {
+//     res.render("new")
+// })
+
+// app.post("/poems", (req, res) => {
+//     console.log(req.body)
+// })
 
 
 

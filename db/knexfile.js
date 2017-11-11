@@ -3,7 +3,11 @@ module.exports = {
     client: 'pg',
     connection: 'postgres://localhost/poemsbyparker_dev',
     migrations: {
+      directory: "./migrations",
       tableName: 'knex_migrations'
+    },
+    seeds: {
+      directory: './seeds'
     }
   },
 
