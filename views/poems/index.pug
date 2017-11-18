@@ -1,5 +1,9 @@
 include ../includes/head.pug
 body.container
-    h1 Hello World
+    br
+    p poemsbyparker
     div
-        h2 #{poems}
+        ol
+            each poem in poems
+                a(href=`/poems/${poem.id}`)
+                    li #{poem.title}

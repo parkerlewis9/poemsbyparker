@@ -28,8 +28,23 @@ app.get("/", (req, res) => {
 app.get("/poems", (req, res) => {
     knex("poems").select("*")
         .then((poems) => {
-            console.log(poems)
             res.render("poems/index", {poems})
+        })
+})
+
+app.get("/poems/:name", (req, res) => {
+    knex("poems")
+        .where("id", req.params.name)
+        .select("*")
+        .first()
+        .then((poem) => {
+            console.log(poem)
+            knex("lines")
+                .where("poem_id", poem.id)
+                .select("*")
+                .then((lines) => {
+                    res.render("poems/show", {poem, lines})
+                })
         })
 })
 

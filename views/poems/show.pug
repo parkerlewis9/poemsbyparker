@@ -1,0 +1,8 @@
+include ../includes/head.pug
+body.container
+    br
+    p 
+        em #{poem.title}
+
+    each line in lines
+        p #{line.content}
