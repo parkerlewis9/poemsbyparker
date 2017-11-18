@@ -1,18 +1,18 @@
 // require('dotenv').load();
 
-var express = require("express"),
+var express = require('express'),
     app = express(),
-    bodyParser = require("body-parser"),
-    methodOverride = require("method-override"),
-    morgan = require("morgan"),
-    knex = require("./db/knex.js")
-    // routeMiddleware = require("./middleware/routeHelper");
+    bodyParser = require('body-parser'),
+    methodOverride = require('method-override'),
+    morgan = require('morgan'),
+    knex = require('./db/knex.js')
+    // routeMiddleware = require('./middleware/routeHelper');
 
 
-app.set("view engine", "pug");
-app.use(methodOverride("_method"));
-app.use(morgan("tiny"));
-app.use(express.static(__dirname + "/public"));
+app.set('view engine', 'pug');
+app.use(methodOverride('_method'));
+app.use(morgan('tiny'));
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.get('/favicon.ico', function(req, res) {
@@ -21,39 +21,41 @@ app.get('/favicon.ico', function(req, res) {
 
 //******************* Home ****************************
 
-app.get("/", (req, res) => {
-    res.render("home")
+app.get('/', (req, res) => {
+    res.render('home')
 })
 
-app.get("/poems", (req, res) => {
-    knex("poems").select("*")
+// Todo - make a collections page that links to indiviual collections (currently /poems)
+
+app.get('/poems', (req, res) => {
+    knex('poems').select('*')
         .then((poems) => {
-            res.render("poems/index", {poems})
+            res.render('poems/index', {poems})
         })
 })
 
-app.get("/poems/:name", (req, res) => {
-    knex("poems")
-        .where("id", req.params.name)
-        .select("*")
+app.get('/poem', (req, res) => {
+    knex('poems')
+        .where('title', req.query.title)
+        .select('*')
         .first()
         .then((poem) => {
             console.log(poem)
-            knex("lines")
-                .where("poem_id", poem.id)
-                .select("*")
+            knex('lines')
+                .where('poem_title', poem.title)
+                .select('*')
                 .then((lines) => {
-                    res.render("poems/show", {poem, lines})
+                    res.render('poems/show', {poem, lines})
                 })
         })
 })
 
 
-// app.get("/poems/new", (req, res) => {
-//     res.render("new")
+// app.get('/poems/new', (req, res) => {
+//     res.render('new')
 // })
 
-// app.post("/poems", (req, res) => {
+// app.post('/poems', (req, res) => {
 //     console.log(req.body)
 // })
 
@@ -66,36 +68,36 @@ app.get("/poems/:name", (req, res) => {
 //******************* Teams ****************************
 
 //Index
-app.get("/teams", function(req, res) {
+app.get('/teams', function(req, res) {
   db.Team.find({})
-    .populate("owner")
+    .populate('owner')
     .exec(function(err, teams) {
-      res.render("teams/index", {teams: teams, isLoggedIn: req.user})
+      res.render('teams/index', {teams: teams, isLoggedIn: req.user})
     })
 })
 
 //New
 
-app.get("/teams/new", function(req, res) {
-  res.render("teams/new", {isLoggedIn: req.user._id});
+app.get('/teams/new', function(req, res) {
+  res.render('teams/new', {isLoggedIn: req.user._id});
 })
 
 //Show
 
-app.get("/teams/:id", function(req, res) {
+app.get('/teams/:id', function(req, res) {
   db.Team.findById(req.params.id)
-    .populate("players")
+    .populate('players')
     .exec(function(err, team) {
       if(req.user === undefined) {
-        req.user = {_id: "a"}
+        req.user = {_id: 'a'}
       } 
-      res.render("teams/show", {team: team, isLoggedIn: req.user})
+      res.render('teams/show', {team: team, isLoggedIn: req.user})
     })
 })
 
 //Create
 
-app.post("/teams", function(req, res) {
+app.post('/teams', function(req, res) {
   db.Team.create(req.body, function(err, team) {
     if(err) console.log(err);
     team.owner = req.user._id;
@@ -106,7 +108,7 @@ app.post("/teams", function(req, res) {
       res.format({
         'text/html': function(){
           //this may be horribly wrong should check over
-          res.redirect("/teams/" + team._id + "/players")
+          res.redirect('/teams/' + team._id + '/players')
         },
 
         'application/json': function(){
@@ -124,27 +126,27 @@ app.post("/teams", function(req, res) {
 
 //Edit
 
-app.get("/teams/:id/edit", function(req, res) {
+app.get('/teams/:id/edit', function(req, res) {
   db.Team.findById(req.params.id, function(err, team) {
-    res.render("teams/edit", {team: team})
+    res.render('teams/edit', {team: team})
   })
 })
 
 //Update
 
-app.put("/teams/:id", function(req, res) {
+app.put('/teams/:id', function(req, res) {
   db.Team.findByIdAndUpdate(req.params.id, req.body.team, function(err, team) {
-    res.redirect("/teams/" + req.params.id)
+    res.redirect('/teams/' + req.params.id)
   })
 })
 
 //Destroy
 
-app.delete("/teams/:id", function(req, res) {
+app.delete('/teams/:id', function(req, res) {
   
   db.Team.findByIdAndRemove(req.params.id, function(err, team) {
     if(err) console.log(err)
-    res.redirect("/teams");
+    res.redirect('/teams');
   })
 })
 
@@ -154,26 +156,26 @@ app.delete("/teams/:id", function(req, res) {
 
 //New
 
-app.get("/teams/:id/players/new", function(req, res) {
+app.get('/teams/:id/players/new', function(req, res) {
   db.Team.findById(req.params.id, function(err, team) {
-    res.render("players/new", {team: team})    
+    res.render('players/new', {team: team})    
   })
 
 })
 
 //Show
 
-app.get("/players/:id", function(req, res) {
+app.get('/players/:id', function(req, res) {
   db.Player.findById(req.params.id)
-    .populate("team")
+    .populate('team')
     .exec(function(err, player) {
       if(err) console.log(err);
       res.format({
         'text/html': function(){
           if(req.user === undefined) {
-            req.user = {_id: ""}
+            req.user = {_id: ''}
           }
-          res.render("players/show", {player: player, isLoggedIn: req.user._id})
+          res.render('players/show', {player: player, isLoggedIn: req.user._id})
         },
 
         'application/json': function(){
@@ -190,7 +192,7 @@ app.get("/players/:id", function(req, res) {
 
 //Create
 
-app.post("/teams/:id/players", function(req, res) {
+app.post('/teams/:id/players', function(req, res) {
   db.Player.create(req.body, function(err, player) {
     if(err) console.log(err)
     player.owner = req.user._id;
@@ -207,7 +209,7 @@ app.post("/teams/:id/players", function(req, res) {
         res.format({
           'text/html': function(){
             //this may be horribly wrong should check over
-            res.render("/teams/show", {team: team});
+            res.render('/teams/show', {team: team});
           },
 
           'application/json': function(){
@@ -229,12 +231,12 @@ app.post("/teams/:id/players", function(req, res) {
 
 //Destroy
 
-app.delete("/players/:id", function(req, res) {
+app.delete('/players/:id', function(req, res) {
   db.Player.findByIdAndRemove(req.params.id)
-    .populate("team")
+    .populate('team')
     .exec(function(err, player) {
       if(err) console.log(err);
-      res.redirect("/teams/" + player.team._id)
+      res.redirect('/teams/' + player.team._id)
     })
 })
 
@@ -255,5 +257,5 @@ app.get('*', function(req,res){
 
 
 app.listen(process.env.PORT || 3000, function() {
-  console.log("Server running on port 3000")
+  console.log('Server running on port 3000')
 })

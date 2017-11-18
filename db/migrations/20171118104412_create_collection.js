@@ -1,7 +1,9 @@
 exports.up = (knex, Promise) => {
-    return knex.schema.createTable('poems', table => {
+    return knex.schema.createTable('collections', (table) => {
 
-        table.string('title')
+        table.uuid('uuid')
+
+        table.string('name')
             .primary()
             .notNullable()
 
@@ -17,5 +19,5 @@ exports.up = (knex, Promise) => {
 }
 
 exports.down = (knex, Promise) => {
-    return knex.schema.dropTable('poems')
+    return knex.schema.dropTable('collections')
 }

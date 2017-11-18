@@ -5,5 +5,7 @@ body.container
     div
         ol
             each poem in poems
-                a(href=`/poems/${poem.id}`)
-                    li #{poem.title}
+                form(name='poem', action=`/poem`, method='GET')
+                    input(type='hidden', name='collection', value=`${poem.collection_name}`)
+                    input(type='hidden', name='title', value=`${poem.title}`)
+                    a(href='javascript:document.forms["poem"].submit()') #{poem.title}
