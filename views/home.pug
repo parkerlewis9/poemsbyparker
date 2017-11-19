@@ -2,13 +2,14 @@ include ./includes/head.pug
 body.container
     //- Pull top fives to the right
     //- Add About type section
+    //- Add inputs instead of a's
     h1 Welcome to poemsbyparker
     div
         p 5 Most Recent Collections
         ul
             each collection in collections
                 li 
-                    a(href=`/collections?name=${collection.name}`) #{collection.name}
+                    a(href=`/collections/toc?collection=${collection.name}`) #{collection.name}
 
     div
         p 5 Most Recent Poems
