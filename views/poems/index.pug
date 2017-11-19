@@ -3,6 +3,7 @@ body.container
     br
     p poemsbyparker
     div
+        p All poems - in alphabetical order
         ol
             each poem in poems
                 form(name='poem', action=`/poem`, method='GET')

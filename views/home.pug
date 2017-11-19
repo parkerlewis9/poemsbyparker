@@ -1,8 +1,18 @@
-<!DOCTYPE html>
-html(lang="en")
-head
-    meta(charset="UTF-8")
-    title poemsbyparker
-body
-
+include ./includes/head.pug
+body.container
+    //- Make these into the link things like on index of poems
     h1 Welcome to poemsbyparker
+    div
+        p 5 Most Recent Collections
+        ul
+            each collection in collections
+                li 
+                    a(href=`/collections?name=${collection.name}`) #{collection.name}
+
+    div
+        p 5 Most Recent Poems
+            ul
+                each poem in poems
+                    li 
+                        a(href=`/collections/poems/?collection=${poem.collection_name}&title=${poem.title}`) #{poem.title} #{poem.collection_name}
+

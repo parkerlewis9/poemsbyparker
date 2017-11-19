@@ -22,31 +22,43 @@ app.get('/favicon.ico', function(req, res) {
 //******************* Home ****************************
 
 app.get('/', (req, res) => {
-    res.render('home')
+    knex('collections')
+        .select("name")
+        .limit(5)
+        .orderBy('updated_at', 'asc')
+        .then(collections => {
+            console.log(collections)
+            knex('poems')
+                .select('title', 'collection_name')
+                .limit(5)
+                .orderBy('updated_at', 'asc')
+                .then(poems => res.render('home', {collections, poems}) )
+        })
 })
 
 // Todo - make a collections page that links to indiviual collections (currently /poems)
 
-app.get('/poems', (req, res) => {
-    knex('poems').select('*')
-        .then((poems) => {
-            res.render('poems/index', {poems})
-        })
+app.get('/collections', (req, res) => {
+    res.render('poems/new')
 })
 
-app.get('/poem', (req, res) => {
+app.get('/poems', (req, res) => {
+    knex('poems')
+        .select('*')
+        .orderBy('title', 'asc')
+        .then(poems => res.render('poems/index', {poems}) )
+})
+
+app.get('/collections/poems', (req, res) => {
     knex('poems')
         .where('title', req.query.title)
         .select('*')
         .first()
         .then((poem) => {
-            console.log(poem)
             knex('lines')
                 .where('poem_title', poem.title)
                 .select('*')
-                .then((lines) => {
-                    res.render('poems/show', {poem, lines})
-                })
+                .then(lines => res.render('poems/show', {poem, lines}) )
         })
 })
 

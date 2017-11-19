@@ -2,7 +2,7 @@ exports.up = (knex, Promise) => {
     return knex.schema.alterTable('poems', table => {
 
         table.uuid('uuid')
-
+            .unique()
         table.string('collection_name')
             .notNullable()
 

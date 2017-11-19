@@ -2,6 +2,7 @@ exports.up = (knex, Promise) => {
     return knex.schema.createTable('collections', (table) => {
 
         table.uuid('uuid')
+            .unique()
 
         table.string('name')
             .primary()
