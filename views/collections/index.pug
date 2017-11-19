@@ -1,0 +1,8 @@
+include ../includes/head.pug
+body.container
+    h1 Collections by parker in alphabetical order
+    ul
+        each collection, i in collections
+            form(name=`collection${i}`, action=`/collections/toc`, method='GET')
+                    input(type='hidden', name='collection', value=`${collection.name}`)
+                    a(href=`javascript:document.forms["collection${i}"].submit()`) #{collection.name}

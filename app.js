@@ -27,7 +27,6 @@ app.get('/', (req, res) => {
         .limit(5)
         .orderBy('updated_at', 'asc')
         .then(collections => {
-            console.log(collections)
             knex('poems')
                 .select('title', 'collection_name')
                 .limit(5)
@@ -36,17 +35,17 @@ app.get('/', (req, res) => {
         })
 })
 
-// Todo - make a collections page that links to indiviual collections (currently /poems)
-
 app.get('/collections', (req, res) => {
-    res.render('poems/new')
+    knex('collections')
+        .select('*')
+        .orderBy('name', 'asc')
+        .then(collections => res.render('collections/index', {collections}))
 })
 
-app.get('/poems', (req, res) => {
+app.get('/collections/toc', (req, res) => {
     knex('poems')
-        .select('*')
-        .orderBy('title', 'asc')
-        .then(poems => res.render('poems/index', {poems}) )
+        .where('collection_name', req.query.collection)
+        .then(poems => res.render('collections/show', {poems}))
 })
 
 app.get('/collections/poems', (req, res) => {
@@ -61,6 +60,14 @@ app.get('/collections/poems', (req, res) => {
                 .then(lines => res.render('poems/show', {poem, lines}) )
         })
 })
+
+app.get('/poems', (req, res) => {
+    knex('poems')
+        .select('*')
+        .orderBy('title', 'asc')
+        .then(poems => res.render('poems/index', {poems}) )
+})
+
 
 
 // app.get('/poems/new', (req, res) => {

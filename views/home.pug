@@ -1,6 +1,7 @@
 include ./includes/head.pug
 body.container
-    //- Make these into the link things like on index of poems
+    //- Pull top fives to the right
+    //- Add About type section
     h1 Welcome to poemsbyparker
     div
         p 5 Most Recent Collections
@@ -14,5 +15,11 @@ body.container
             ul
                 each poem in poems
                     li 
-                        a(href=`/collections/poems/?collection=${poem.collection_name}&title=${poem.title}`) #{poem.title} #{poem.collection_name}
+                        a(href=`/collections/poems/?collection=${poem.collection_name}&title=${poem.title}`) #{poem.title}
+
+    div
+        a(href="/collections") All Collections
+
+    div
+        a(href="/poems") All Poems
 
