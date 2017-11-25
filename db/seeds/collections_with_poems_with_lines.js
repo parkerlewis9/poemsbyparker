@@ -10,16 +10,16 @@ const createCollection = (collection, knex, Promise) => {
 }
 
 const createPoem = (poem, knex, Promise) => {
-    return knex('poems').insert({uuid: poem.uuid, title:poem.title, collection_name: poem.collection_name}, 'title')
+    return knex('poems').insert({uuid: poem.uuid, title:poem.title, collection_name: poem.collection_name, date_written: poem.date_written}, 'title')
         .then(poemData => {
             let poemTitle = poemData[0]
-            let linesPromises = poem.lines.map(line => createLine(line, poemTitle, knex))
+            let linesPromises = poem.lines.map(line => createLine(line, knex))
             return Promise.all(linesPromises)
         })
 }
 
-const createLine = (line, poemTitle, knex) => {
-    return knex('lines').insert({content: line, poem_title: poemTitle})
+const createLine = (line, knex) => {
+    return knex('lines').insert({content: line.content, poem_title: line.poem_title, uuid: line.uuid, line_number: line.line_number})
 }
 
 exports.seed = (knex, Promise) => {
