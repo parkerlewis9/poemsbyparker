@@ -2,7 +2,9 @@ include ../includes/head.pug
 body.container
     br
     p 
-        em #{poem.title}
+        span #{poem.title}
+        if poem.date_written
+            em  - #{poem.date_written}
 
     each line in lines
         p #{line.content}

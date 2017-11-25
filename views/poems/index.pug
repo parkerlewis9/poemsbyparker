@@ -5,8 +5,8 @@ body.container
     div
         p All poems - in alphabetical order
         ol
-            each poem in poems
-                form(name='poem', action=`/collections/poems`, method='GET')
+            each poem, i in poems
+                form(name=`poem${i}`, action=`/collections/poems`, method='GET')
                     input(type='hidden', name='collection', value=`${poem.collection_name}`)
                     input(type='hidden', name='title', value=`${poem.title}`)
-                    a(href='javascript:document.forms["poem"].submit()') #{poem.title}
+                    a(href=`javascript:document.forms["poem${i}"].submit()`) #{poem.title}
