@@ -5,7 +5,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     methodOverride = require('method-override'),
     morgan = require('morgan'),
-    knex = require('./db/knex.js')
+    knex = require('./knex.js')
     // routeMiddleware = require('./middleware/routeHelper');
 
 
