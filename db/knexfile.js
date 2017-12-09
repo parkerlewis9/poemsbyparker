@@ -23,8 +23,7 @@ module.exports = {
     client: 'pg',
     connection: {
       port: process.env.DB_PORT,
-      host: process.env.DATBASE_URL,
-      database: process.env.DATABASE_URL + `?ssl=true`,
+      database: process.env.DB_URL + `?ssl=true`,
       user: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD
     },
