@@ -25,8 +25,7 @@ module.exports = {
       host: process.env.DATABASE_URL + `?ssl=true`,
       user: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD
-    }
-    username: 
+    },
     migrations: {
       directory: "./migrations",
       tableName: 'knex_migrations'
