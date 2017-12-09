@@ -20,7 +20,8 @@ module.exports = {
   },
 
   production: {
-    client: 'pg',
+    client: 'postgresql',
+    // client: 'pg',
     connection: process.env.DATABASE_URL + '?ssl=true',
     // connection: {
     //   host: process.env.DB_HOST,
