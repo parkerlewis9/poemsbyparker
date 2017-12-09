@@ -3,11 +3,11 @@ module.exports = {
     client: 'pg',
     connection: 'postgres://localhost/poemsbyparker_dev',
     migrations: {
-      directory: "./db/migrations",
+      directory: "./migrations",
       tableName: 'knex_migrations'
     },
     seeds: {
-      directory: './db/seeds'
+      directory: './seeds'
     }
   },
 
@@ -28,11 +28,11 @@ module.exports = {
       password: process.env.DB_PASSWORD
     },
     migrations: {
-      directory: "./db/migrations",
+      directory: "./migrations",
       tableName: 'knex_migrations'
     },
     seeds: {
-      directory: './db/seeds'
+      directory: './seeds'
     }
   }
 };
