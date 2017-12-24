@@ -1,13 +1,20 @@
 include ../includes/head.pug
 body.container
-    h1 Create new poem Parker!
+    h1 Create new poem
 
-    form(action="/poems" method="POST")
+    form(action="/collections/poems" method="POST")
         lable Title 
-            input(type="text", name="title")
-        //- TODO -- Make a component that gives more incrementing places for lines.
-        div#lines
-            input(type="text", name="1_line")
+            input(type="text", name="title", required)
+        lable Date Written
+            input(type="text", name="date_written")
+        lable Lines
+            textarea(name="lines", cols="30", rows="10", required)
+
+        select(name="collection_name", required)
+            option(disabled, selected) -- Choose a Collection --
+            each collection in collections
+                option(value=`${collection.name}`) #{collection.name}
+            
         div
             input(type="submit", value="Create Poem")
 

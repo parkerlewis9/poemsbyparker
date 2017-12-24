@@ -16,11 +16,11 @@ body.container
             ul
                 each poem in poems
                     li 
-                        a(href=`/collections/poems/?collection=${poem.collection_name}&title=${poem.title}`) #{poem.title}
+                        a(href=`/collections/poems/p?collection=${poem.collection_name}&title=${poem.title}`) #{poem.title}
 
     div
         a(href="/collections") All Collections
 
     div
-        a(href="/poems") All Poems
+        a(href="/collections/poems") All Poems
 

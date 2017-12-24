@@ -17,6 +17,8 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.use('/collections', routes.collections)
+app.use('/collections/poems', routes.poems)
+
 
 app.get('/favicon.ico', function(req, res) {
     res.status(204);
@@ -46,18 +48,18 @@ app.get('/', (req, res) => {
 // })
 
 
-app.get('/collections/poems', (req, res) => {
-    knex('poems')
-        .where('title', req.query.title)
-        .select('*')
-        .first()
-        .then((poem) => {
-            knex('lines')
-                .where('poem_title', poem.title)
-                .select('*')
-                .then(lines => res.render('poems/show', {poem, lines}) )
-        })
-})
+// app.get('/collections/poems', (req, res) => {
+//     knex('poems')
+//         .where('title', req.query.title)
+//         .select('*')
+//         .first()
+//         .then((poem) => {
+//             knex('lines')
+//                 .where('poem_title', poem.title)
+//                 .select('*')
+//                 .then(lines => res.render('poems/show', {poem, lines}) )
+//         })
+// })
 
 app.get('/poems', (req, res) => {
     knex('poems')

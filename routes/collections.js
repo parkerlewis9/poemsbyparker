@@ -1,6 +1,6 @@
 let express = require('express'),
     router = express.Router(),
-    knex = require('../knex.js'),
+    knex = require('../knex'),
     uuid = require('uuid/v4')
 
 router.route('/')
