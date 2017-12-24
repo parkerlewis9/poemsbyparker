@@ -8,3 +8,6 @@ body.container
         label Description
             textarea(name="description", cols="30", rows="10") #{collection.description}
         input(type="submit", value="Edit Collection")
+
+    form(action=`/collections?_method=DELETE&uuid=${collection.uuid}`, method='POST')
+        input(type="submit", value="Delete this collection")

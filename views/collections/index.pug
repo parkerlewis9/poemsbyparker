@@ -4,5 +4,5 @@ body.container
     ul
         each collection, i in collections
             form(name=`collection${i}`, action=`/collections/c`, method='GET')
-                    input(type='hidden', name='collection', value=`${collection.name}`)
+                    input(type='hidden', name='name', value=`${collection.name}`)
                     a(href=`javascript:document.forms["collection${i}"].submit()`) #{collection.name}
