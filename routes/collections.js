@@ -20,7 +20,7 @@ router.route('/')
     })
     .patch((req, res) => {
         knex('collections')
-            .where({uuid: req.query.uuid})
+            .where('uuid', req.query.uuid)
             .update({   name: req.body.name,
                         description: req.body.description
                     }, 'name')
@@ -33,16 +33,16 @@ router.route('/')
             .then(res.redirect('/collections'))
     })
 
+router.route('/new')
+    .get((req, res) => {
+        res.render('collections/new')
+    })
+
 router.route('/c')
     .get((req, res) => {
         knex('poems')
             .where('collection_name', req.query.name)
             .then(poems => res.render('collections/show', {poems}))
-    })
-
-router.route('/new')
-    .get((req, res) => {
-        res.render('collections/new')
     })
 
 router.route('/c/edit')
@@ -52,7 +52,5 @@ router.route('/c/edit')
             .first()
             .then(collection => res.render('collections/edit', {collection}))
     })
-
-
 
 module.exports = router
