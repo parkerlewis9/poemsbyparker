@@ -1,7 +1,7 @@
 const collections = require('../poems_data/index')
 
 const createCollection = (collection, knex, Promise) => {
-    return knex('collections').insert({name: collection.name, uuid: collection.uuid}, 'name')
+    return knex('collections').insert({name: collection.name, description: collection.description, uuid: collection.uuid}, 'name')
         .then(collectionData => {
             let collectionName = collectionData[0]
             let poemPromises = collection.poems.map(poem => createPoem(poem, knex, Promise))

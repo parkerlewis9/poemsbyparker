@@ -1,11 +1,12 @@
 // require('dotenv').load();
 
-var express = require('express'),
+let express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
     methodOverride = require('method-override'),
     morgan = require('morgan'),
-    knex = require('./knex.js')
+    knex = require('./knex.js'),
+    routes = require('./routes')
     // routeMiddleware = require('./middleware/routeHelper');
 
 
@@ -14,6 +15,8 @@ app.use(methodOverride('_method'));
 app.use(morgan('tiny'));
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended:true}));
+
+app.use('/collections', routes.collections)
 
 app.get('/favicon.ico', function(req, res) {
     res.status(204);
@@ -35,18 +38,13 @@ app.get('/', (req, res) => {
         })
 })
 
-app.get('/collections', (req, res) => {
-    knex('collections')
-        .select('*')
-        .orderBy('name', 'asc')
-        .then(collections => res.render('collections/index', {collections}))
-})
+// app.get('/collections', (req, res) => {
+//     knex('collections')
+//         .select('*')
+//         .orderBy('name', 'asc')
+//         .then(collections => res.render('collections/index', {collections}))
+// })
 
-app.get('/collections/toc', (req, res) => {
-    knex('poems')
-        .where('collection_name', req.query.collection)
-        .then(poems => res.render('collections/show', {poems}))
-})
 
 app.get('/collections/poems', (req, res) => {
     knex('poems')

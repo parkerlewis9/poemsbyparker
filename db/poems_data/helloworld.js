@@ -1,6 +1,7 @@
 module.exports = { 
     uuid: '00eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
     name: 'helloworld',
+    description: 'Empty for now',
     poems: [
         {
             uuid: '10eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',

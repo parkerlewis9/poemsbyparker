@@ -1,0 +1,11 @@
+include ../includes/head.pug
+body.container
+    h1 Create a new collection
+
+    form(action='/collections', method='POST')
+        label Name
+            input(type="text", name="name")
+        label Description
+            textarea(name="description", cols="30", rows="10")
+
+        input(type="submit", value="Create new collection")

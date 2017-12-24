@@ -1,0 +1,10 @@
+include ../includes/head.pug
+body.container
+    h1 Edit #{collection.name}
+
+    form(action=`/collections?_method=PATCH&uuid=${collection.uuid}`, method='POST')
+        label Name
+            input(type="text", name="name", value=`${collection.name}`)
+        label Description
+            textarea(name="description", cols="30", rows="10") #{collection.description}
+        input(type="submit", value="Edit Collection")
