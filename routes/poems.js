@@ -41,6 +41,9 @@ router.route("/")
                 res.redirect(`/collections/poems/p?title=${promises_and_title.poem_title}`)
             })
     })
+    .patch((req, res) => {
+
+    })
 
 // New
 router.route("/new")
@@ -64,6 +67,15 @@ router.route('/p')
                     .orderBy('line_number', 'asc')
                     .then(lines => res.render('poems/show', {poem, lines}) )
             })
+    })
+
+router.route('/p/edit')
+    .get((req, res) => {
+        // knex('poems')
+        //     .where('title', req,query.title)
+        //     .select('*')
+        //     .first()
+        //     .then(poem => res.render('poems/edit', {poem}))
     })
 
 module.exports = router
