@@ -4,19 +4,19 @@ body.container
     //- Add About type section
     //- Add inputs instead of a's
     h1 Welcome to poemsbyparker
-    div
-        p 5 Most Recent Collections
-        ul
-            each collection in collections
-                li 
-                    a(href=`/collections/c?name=${collection.name}`) #{collection.name}
+    //- div
+    //-     p 5 Most Recent Collections
+    //-     ul
+    //-         each collection in collections
+    //-             li 
+    //-                 a(href=`/collections/c?name=${collection.name}`) #{collection.name}
 
-    div
-        p 5 Most Recent Poems
-            ul
-                each poem in poems
-                    li 
-                        a(href=`/collections/poems/p?collection=${poem.collection_name}&title=${poem.title}`) #{poem.title}
+    //- div
+    //-     p 5 Most Recent Poems
+    //-         ul
+    //-             each poem in poems
+    //-                 li 
+    //-                     a(href=`/collections/poems/p?collection=${poem.collection_name}&title=${poem.title}`) #{poem.title}
 
     div
         a(href="/collections") All Collections

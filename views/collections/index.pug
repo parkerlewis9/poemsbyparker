@@ -1,6 +1,6 @@
 include ../includes/head.pug
 body.container
-    h1 Collections by parker in alphabetical order
+    h1 Collections by Parker
     ul
         each collection, i in collections
             form(name=`collection${i}`, action=`/collections/c`, method='GET')
