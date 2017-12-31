@@ -1,6 +1,6 @@
 include ../includes/head.pug
 .container
-    h1 Poems in #{poems[0].collection_name}
+    h1 #{poems[0].collection_name}
 
     each poem, i in poems
         form(name=`poem${i}`, action=`/collections/poems/p`, method='GET')
