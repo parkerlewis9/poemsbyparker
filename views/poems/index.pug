@@ -3,7 +3,7 @@ body.container
     h1 Poems by Parker
     ul
         each poem, i in poems
-            form(name=`poem${i}`, action=`/collections/poems`, method='GET')
+            form(name=`poem${i}`, action=`/collections/poems/p`, method='GET')
                 input(type='hidden', name='collection', value=`${poem.collection_name}`)
                 input(type='hidden', name='title', value=`${poem.title}`)
                 a(href=`javascript:document.forms["poem${i}"].submit()`) #{poem.title}
