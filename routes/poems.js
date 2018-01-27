@@ -9,15 +9,18 @@ let express = require('express'),
 
 // Delete
 
+// √ Index
+// √ Create
+// √ New
+// √ Show
+
 router.route("/")
-// Index
     .get((req, res) => {
         knex('poems')
             .select('*')
             .orderBy('title', 'asc')
             .then(poems => res.render('poems/index', {poems}) )
     })
-// Create
     .post((req, res) => {
         req.body.date_written = req.body.date_written || ""
         knex('poems')
@@ -44,8 +47,10 @@ router.route("/")
     .patch((req, res) => {
 
     })
+    .delete((req, res) => {
 
-// New
+    })
+
 router.route("/new")
     .get((req, res) => {
         knex('collections')
@@ -54,7 +59,6 @@ router.route("/new")
     })
 
 router.route('/p')
-// Show
     .get((req, res) => {
         knex('poems')
             .where('title', req.query.title)
@@ -71,11 +75,36 @@ router.route('/p')
 
 router.route('/p/edit')
     .get((req, res) => {
-        // knex('poems')
-        //     .where('title', req,query.title)
-        //     .select('*')
-        //     .first()
-        //     .then(poem => res.render('poems/edit', {poem}))
+        knex('poems')
+            .where('title', req.query.title)
+            .select('*')
+            .first()
+            .then(poem => {
+                return knex('lines')
+                    .where('poem_title', poem.title)
+                    .select('*')
+                    .orderBy('line_number', "asc")
+                    .then(lines => {
+                        return {lines, poem}
+                    })
+            })
+            .then(({lines, poem}) => {
+                // console.log(lines)
+                console.log("foo" + lines[1].content + "bar")
+                // console.log(poem)
+            })
     })
 
 module.exports = router
+
+
+
+                // res.render('poems/edit', {poem})
+
+
+
+
+
+
+
+
