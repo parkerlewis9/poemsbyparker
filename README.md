@@ -1,3 +1,3 @@
 # poemsbyparker
 
-[poemsbyparker.herokuapp.com](http://www.poemsbyparker.herokuapp.com)
+[poemsbyparker.herokuapp.com](http://poemsbyparker.herokuapp.com)
