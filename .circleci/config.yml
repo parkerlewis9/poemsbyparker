@@ -35,5 +35,9 @@ jobs:
         
       # run tests!
       - run: yarn test
+      - deploy:
+            name: Pushing to Docker
+            command: |
+                $DOCKER_HUB_TRIGGER
 
 

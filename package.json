@@ -1,7 +1,7 @@
 {
   "name": "poemsbyparker",
   "version": "1.0.0",
-  "description": "Poems written by Parker Lewis in 2017",
+  "description": "Poems written by Parker Lewis",
   "main": "app.js",
   "scripts": {
     "test": "mocha ./test",
