@@ -2,7 +2,7 @@ process.env.NODE_ENV = "test";
 
 const   mocha = require("mocha"),
         expect = require("chai").expect,
-        knex = require("../db/knex");
+        knex = require("../knex");
 
 describe("Migration Tests", function () {
     before((done) => {
