@@ -38,6 +38,6 @@ jobs:
       - deploy:
             name: Pushing to Docker
             command: |
-                $DOCKER_HUB_TRIGGER
+                ${DOCKER_HUB_TRIGGER}
 
 
