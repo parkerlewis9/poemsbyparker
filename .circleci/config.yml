@@ -35,8 +35,11 @@ jobs:
         
       # run tests!
       - run: yarn test
-      - deploy:
-            name: Pushing to Docker
-            command: ${DOCKER_HUB_TRIGGER}
+      - deployment:
+            name: Publishing to Docker
+            dockerhub:
+                branch: master
+                commands: 
+                    - ${DOCKER_HUB_TRIGGER}
 
 
